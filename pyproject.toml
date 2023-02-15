@@ -5,7 +5,7 @@ description = ""
 authors = ["utgwkk <utagawakiki@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "20230215_sketch_crawler"}]
+packages = []
 
 [tool.poetry.dependencies]
 python = "^3.10"
