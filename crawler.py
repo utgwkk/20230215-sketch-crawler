@@ -77,12 +77,14 @@ class Crawler:
             return
 
         print(url)
-        time.sleep(1. * (random.random() + 0.5))
 
         self._crawled.add(url)
         resp = self._session.get(
             url, allow_redirects=True, headers={"User-Agent": USER_AGENT}
         )
+        if not resp.from_cache:
+            time.sleep(1. * (random.random() + 0.5))
+
         if resp.status_code != 200:
             return
 
