@@ -2,6 +2,7 @@ from html.parser import HTMLParser
 import queue
 import requests
 import time
+import random
 from typing import List, Callable
 import urllib.parse
 import re
@@ -75,7 +76,7 @@ class Crawler:
             return
 
         print(url)
-        time.sleep(0.4)
+        time.sleep(1. * (random.random() + 0.5))
 
         self._crawled.add(url)
         resp = requests.get(
