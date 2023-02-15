@@ -5,7 +5,6 @@ import time
 import random
 from typing import List, Callable
 import urllib.parse
-import re
 
 USER_AGENT = "crawler (+utagawakiki@gmail.com)"
 
