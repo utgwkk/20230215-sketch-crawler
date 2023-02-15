@@ -1,6 +1,7 @@
 from html.parser import HTMLParser
 import queue
 import requests
+import requests_cache
 import time
 import random
 from typing import List, Callable
@@ -51,6 +52,7 @@ class Crawler:
         self._crawled = set()
         self._queue = queue.Queue()
         self._queue.put(origin)
+        self._session = requests_cache.CachedSession('http_cache', backend='filesystem')
 
     def crawl(self):
         while not self._queue.empty():
@@ -78,7 +80,7 @@ class Crawler:
         time.sleep(1. * (random.random() + 0.5))
 
         self._crawled.add(url)
-        resp = requests.get(
+        resp = self._session.get(
             url, allow_redirects=True, headers={"User-Agent": USER_AGENT}
         )
         if resp.status_code != 200:
