@@ -84,14 +84,14 @@ class Crawler:
         if resp.status_code != 200:
             return
 
-        next_urls = self._extract_anchor_urls(resp.text)
+        next_urls = self._extract_anchor_urls(url, resp.text)
         for url in next_urls:
             if url in self._crawled:
                 continue
 
             self._queue.put(url)
 
-    def _extract_anchor_urls(self, body: str) -> List[str]:
-        extractor = AnchorExtractor(self._baseurl, ignore_if=lambda url: '~' in url)
+    def _extract_anchor_urls(self, url: str, body: str) -> List[str]:
+        extractor = AnchorExtractor(url, ignore_if=lambda url: '~' in url)
         extractor.feed(body)
         return extractor.anchors()
